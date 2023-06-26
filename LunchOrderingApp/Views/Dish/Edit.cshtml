@@ -1,0 +1,64 @@
+﻿@using LunchOrderingApp.Models.ViewModels.DishViewModels
+@model DishVM
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<section class="p-5 mt-4">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+                <div class="card text-black" style="border-radius: 25px;">
+                    <div class="card-body p-md-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Add new restaurant</p>
+                                <form asp-action="Edit" method="post" class="mx-1 mx-md-4" enctype="multipart/form-data">
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input aria-required="true" asp-for="DishName" type="text" class="form-control" />
+                                            <label asp-for="DishName" class="form-label">Dish Name</label>
+                                            <span asp-validation-for="DishName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <textarea aria-required="true" asp-for="DishDescription" type="text" class="form-control md-textarea" rows="3"></textarea>
+                                            <label asp-for="DishDescription" class="form-label">Dish Description</label>
+                                            <span asp-validation-for="DishDescription" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="form-outline flex-fill mb-0 file-upload-wrapper">
+                                            <input aria-required="true" asp-for="DishImage" type="file" class="form-control" />
+                                            <span asp-validation-for="DishImage" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label asp-for="MenuId">Menu</label>
+                                            <select asp-for="MenuId" class="form-select">
+                                                @foreach (var menu in ViewBag.Menus)
+                                                {
+                                                    <option value="@menu.MenuId">@menu.MenuName</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex w-100 justify-content-center">
+                                        <button type="submit" class="btn btn-primary mx-3 btn">Save</button>
+                                        <a asp-controller="Dish" asp-action="Index" class="btn mx-3 btn-warning">Cancel</a>
+                                        <a asp-action="Delete" asp-controller="Dish" asp-route-id="@Model.DishId" type="submit" class="my-auto btn-danger btn">Delete</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

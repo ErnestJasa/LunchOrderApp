@@ -1,0 +1,27 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using LunchOrderingApp.Areas.Identity.Data
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    string username = UserManager.GetUserName(User);
+}
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="d-flex align-items-center text-decoration-none">
+
+        <p class="text-dark px-3 my-0 me-2 ">@username</p>
+        <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button type="submit" class="text-dark me-3 border-0 bg-transparent" id="logout">Logout</button>
+        </form>
+    </div>  
+}
+else
+{
+    <div class="d-flex align-items-center text-decoration-none">
+
+        <a class="text-dark px-3 me-2 " id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        <a class="text-dark me-3" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    </div>
+}
